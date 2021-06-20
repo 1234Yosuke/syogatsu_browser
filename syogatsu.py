@@ -12,7 +12,7 @@ from PyQt5.QtWebEngineWidgets import QWebEngineView
 __program__ = "Syogatsu Browser"
 
 
-class PyCakeWindow(QWidget):
+class SyogatsuWindow(QWidget):
 
     def __init__(self):
         super().__init__()
@@ -89,5 +89,5 @@ if __name__ == "__main__":
     path = os.path.join(os.path.dirname(sys.modules[__name__].__file__), "syogatsu-icon.png")
     app.setWindowIcon(QIcon(path))
 
-    ex = PyCakeWindow()
+    ex = SyogatsuWindow()
     sys.exit(app.exec_())
