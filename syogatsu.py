@@ -3,7 +3,7 @@
 
 import sys
 import os
-from PyQt5.QtWidgets import (QWidget, QLabel, QLineEdit, 
+from PyQt5.QtWidgets import (QMainWindow, QWidget, QLabel, QLineEdit, 
                              QTextEdit, QGridLayout, QApplication, QPushButton,  QDesktopWidget)
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import QUrl
@@ -31,16 +31,28 @@ class SyogatsuWindow(QWidget):
         self.browser.move(200,200)
         self.browser.setWindowTitle(__program__)
 
+        syogatsu_version = QMainWindow.QAction('&Exit', self)
+
+        #メニューバーの設定
+        menubar = QMainWindow.menuBar()
+        aboutMenu = menubar.addMenu("&File")
+        aboutMenu.addAction(syogatsu_version)
+
         # ボタンを設定
-        self.back_button = QPushButton("back")
-        self.back_button.clicked.connect(self.browser.back)        
-        self.forward_button = QPushButton("forward")
+        self.back_button = QPushButton("<")
+        self.back_button.clicked.connect(self.browser.back)      
+        self.back_button.setFlat(True)  
+        self.forward_button = QPushButton(">")
         self.forward_button.clicked.connect(self.browser.forward)
-        self.reload_button = QPushButton("reload")
+        self.forward_button.setFlat(True)
+        self.reload_button = QPushButton("↺")
         self.reload_button.clicked.connect(self.browser.reload)
+        self.reload_button.setFlat(True)
         self.url_edit = QLineEdit()
+        self.url_edit.editingFinished.connect(self.loadPage)
         self.move_button = QPushButton("move")
         self.move_button.clicked.connect(self.loadPage)
+        self.move_button.setFlat(True)
 
         self.browser.urlChanged.connect(self.updateCurrentUrl)
 
